@@ -24,6 +24,7 @@ class pwndoc(object):
         self.companies = companies(self.api)
         self.data = data(self.api)
         self.users = users(self.api)
+        self.vulnerabilities = vulnerabilities(self.api)
 
     def login(self, username, password):
         return self.api.login(username, password)

@@ -172,6 +172,10 @@ class API(object):
     def findings_delete_by_id(self, _audit_id, _finding_id):  # ok
         return self.__api_delete("/api/audits/%s/findings/%s" % (_audit_id, _finding_id))
 
+    # Vulnerabilities =================================================================
+    def vulnerabilities_list(self, lang):
+        return self.__api_get("/api/vulnerabilities/%s" % lang)
+
     # Internal Methods =========================================================
 
     def __api_get(self, endpoint):

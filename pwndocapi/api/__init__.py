@@ -10,3 +10,4 @@ from .clients import clients
 from .companies import companies
 from .data import data
 from .users import users
+from .vulnerabilities import vulnerabilities

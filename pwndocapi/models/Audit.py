@@ -25,7 +25,7 @@ class Audit(object):
     def delete(self):
         self.api.audits_delete(self._id)
 
-    def add_finding(self, title, vulnType, category, description, observation, remediation, references, remediationComplexity, priority, poc, scope, cvssv3, cvssScore, cvssSeverity, customFields=[]):
+    def add_finding(self, title, vulnType, category, description, observation, remediation, references, remediationComplexity, priority, poc, scope, cvssv3, customFields=[]):
         scope = "<ul>" + "".join(["<li><p>%s</p></li>" % vt for vt in scope]) + "</ul>"
 
         self.api.audit_add_finding(
@@ -42,8 +42,8 @@ class Audit(object):
             poc=poc,
             scope=scope,
             cvssv3=cvssv3,
-            cvssScore=cvssScore,
-            cvssSeverity=cvssSeverity,
+            # cvssScore=cvssScore,
+            # cvssSeverity=cvssSeverity,
             customFields=customFields
         )
 

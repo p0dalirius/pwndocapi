@@ -102,7 +102,7 @@ class API(object):
     def audits_get_by_id(self, _audit_id):  # ok
         return self.__api_get("/api/audits/%s" % _audit_id)
 
-    def audit_add_finding(self, _audit_id, title, vulnType, category, description, observation, remediation, references, remediationComplexity, priority, poc, scope, cvssv3, cvssScore, cvssSeverity, customFields=[]):
+    def audit_add_finding(self, _audit_id, title, vulnType, category, description, observation, remediation, references, remediationComplexity, priority, poc, scope, cvssv3, customFields=[]):
         return self.__api_post(
             "/api/audits/%s/findings" % _audit_id,
             jsondata={
@@ -116,8 +116,8 @@ class API(object):
                 "remediationComplexity": remediationComplexity,
                 "priority": priority,
                 "cvssv3": cvssv3,
-                "cvssScore": cvssScore,
-                "cvssSeverity": cvssSeverity,
+                # "cvssScore": cvssScore,
+                # "cvssSeverity": cvssSeverity,
                 "poc": poc,
                 "scope": scope,
                 "customFields": customFields
@@ -171,6 +171,10 @@ class API(object):
 
     def findings_delete_by_id(self, _audit_id, _finding_id):  # ok
         return self.__api_delete("/api/audits/%s/findings/%s" % (_audit_id, _finding_id))
+
+    # Vulnerabilities =================================================================
+    def vulnerabilities_list(self, lang):
+        return self.__api_get("/api/vulnerabilities/%s" % lang)
 
     # Internal Methods =========================================================
 

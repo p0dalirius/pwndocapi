@@ -10,9 +10,9 @@ import requests
 
 # Disable warings of insecure connection for invalid certificates
 requests.packages.urllib3.disable_warnings()
-# Allow use of deprecated and weak cipher methods
-requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 try:
+    # Allow use of deprecated and weak cipher methods
+    requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
     requests.packages.urllib3.contrib.pyopenssl.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 except AttributeError:
     pass

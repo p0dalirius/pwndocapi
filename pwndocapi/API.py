@@ -40,10 +40,10 @@ class API(object):
         self.verbose = verbose
         self.user = {"token": "", "refreshToken": ""}
 
-    def login(self, username, password):
+    def login(self, username, password, totp=""):
         r = self.session.post(
             self.target + "/api/users/token",
-            json={"username": username, "password": password, "totpToken": ""},
+            json={"username": username, "password": password, "totpToken": totp},
             verify=False
         )
         if r.json()["status"] == "success":
@@ -57,7 +57,7 @@ class API(object):
             self.loggedin = True
         elif r.json()["status"] == "error":
             if self.verbose:
-                print("[!] Login error. (%s)" % r.json()["status"])
+                print("[!] Login error. (%s)" % r.json()["datas"])
             self.loggedin = False
         return self.loggedin
 

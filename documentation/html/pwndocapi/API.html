@@ -68,10 +68,10 @@ class API(object):
         self.verbose = verbose
         self.user = {&#34;token&#34;: &#34;&#34;, &#34;refreshToken&#34;: &#34;&#34;}
 
-    def login(self, username, password):
+    def login(self, username, password, totp=&#34;&#34;):
         r = self.session.post(
             self.target + &#34;/api/users/token&#34;,
-            json={&#34;username&#34;: username, &#34;password&#34;: password, &#34;totpToken&#34;: &#34;&#34;},
+            json={&#34;username&#34;: username, &#34;password&#34;: password, &#34;totpToken&#34;: totp},
             verify=False
         )
         if r.json()[&#34;status&#34;] == &#34;success&#34;:
@@ -287,10 +287,10 @@ class API(object):
         self.verbose = verbose
         self.user = {&#34;token&#34;: &#34;&#34;, &#34;refreshToken&#34;: &#34;&#34;}
 
-    def login(self, username, password):
+    def login(self, username, password, totp=&#34;&#34;):
         r = self.session.post(
             self.target + &#34;/api/users/token&#34;,
-            json={&#34;username&#34;: username, &#34;password&#34;: password, &#34;totpToken&#34;: &#34;&#34;},
+            json={&#34;username&#34;: username, &#34;password&#34;: password, &#34;totpToken&#34;: totp},
             verify=False
         )
         if r.json()[&#34;status&#34;] == &#34;success&#34;:
@@ -304,7 +304,7 @@ class API(object):
             self.loggedin = True
         elif r.json()[&#34;status&#34;] == &#34;error&#34;:
             if self.verbose:
-                print(&#34;[!] Login error. (%s)&#34; % r.json()[&#34;status&#34;])
+                print(&#34;[!] Login error. (%s)&#34; % r.json()[&#34;datas&#34;])
             self.loggedin = False
         return self.loggedin
 
@@ -704,7 +704,7 @@ class API(object):
 </details>
 </dd>
 <dt id="pwndocapi.API.API.login"><code class="name flex">
-<span>def <span class="ident">login</span></span>(<span>self, username, password)</span>
+<span>def <span class="ident">login</span></span>(<span>self, username, password, totp=&#34;&#34;)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -712,10 +712,10 @@ class API(object):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def login(self, username, password):
+<pre><code class="python">def login(self, username, password, totp=&#34;&#34;):
     r = self.session.post(
         self.target + &#34;/api/users/token&#34;,
-        json={&#34;username&#34;: username, &#34;password&#34;: password, &#34;totpToken&#34;: &#34;&#34;},
+        json={&#34;username&#34;: username, &#34;password&#34;: password, &#34;totpToken&#34;: totp},
         verify=False
     )
     if r.json()[&#34;status&#34;] == &#34;success&#34;:
@@ -729,7 +729,7 @@ class API(object):
         self.loggedin = True
     elif r.json()[&#34;status&#34;] == &#34;error&#34;:
         if self.verbose:
-            print(&#34;[!] Login error. (%s)&#34; % r.json()[&#34;status&#34;])
+            print(&#34;[!] Login error. (%s)&#34; % r.json()[&#34;datas&#34;])
         self.loggedin = False
     return self.loggedin</code></pre>
 </details>

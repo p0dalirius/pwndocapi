@@ -7,7 +7,7 @@
 
 class clients(object):
     """
-    Documentation for class clients
+    A Python native library to automate reporting vulnerabilities into pwndoc.
     """
 
     def __init__(self, api):

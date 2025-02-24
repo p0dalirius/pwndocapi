@@ -11,11 +11,13 @@ import argparse
 
 def parseArgs():
     parser = argparse.ArgumentParser(description="Description message")
+
     parser.add_argument("-u", "--username", default=None, required=True, help='Pwndoc username')
     parser.add_argument("-p", "--password", default=None, required=True, help='Pwndoc password')
     parser.add_argument("-H", "--host", default=None, required=True, help='Pwndoc ip')
     parser.add_argument("-P", "--port", default=8443, required=False, help='Pwndoc port')
     parser.add_argument("-v", "--verbose", default=False, action="store_true", help='Verbose mode. (default: False)')
+    
     return parser.parse_args()
 
 

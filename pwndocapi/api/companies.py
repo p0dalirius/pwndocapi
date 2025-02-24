@@ -7,7 +7,7 @@
 
 class companies(object):
     """
-    Documentation for class companies
+    A Python native library to automate reporting vulnerabilities into pwndoc.
     """
 
     def __init__(self, api):

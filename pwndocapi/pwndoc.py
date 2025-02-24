@@ -11,7 +11,7 @@ from .api import *
 
 class pwndoc(object):
     """
-    Documentation for class pwndoc
+    A Python native library to automate reporting vulnerabilities into pwndoc.
     """
 
     def __init__(self, host, port=443, verbose=True):
@@ -27,7 +27,17 @@ class pwndoc(object):
         self.vulnerabilities = vulnerabilities(self.api)
 
     def login(self, username, password):
+        """
+        Login to the API.
+
+        This function sends a POST request to the /api/users/token endpoint to login to the API.
+        """
         return self.api.login(username, password)
 
     def isLoggedIn(self):
+        """
+        Check if the user is logged in.
+
+        This function returns the value of the loggedin attribute.
+        """
         return self.api.loggedin

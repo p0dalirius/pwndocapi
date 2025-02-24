@@ -19,6 +19,7 @@ except AttributeError:
 
 
 from .models.Audit import Audit
+from .api.errors import MissingTOTP, FailedLogin, FailedConnection
 
 
 DEBUG = False
@@ -51,19 +52,30 @@ class API(object):
             json={"username": username, "password": password, "totpToken": totp},
             verify=False
         )
-        if r.json()["status"] == "success":
+        jsonresponse = r.json()
+
+        if jsonresponse["status"] == "success":
             if self.verbose:
                 print("[>] Successfully logged in.")
             self.user = {
-                "token": r.json()["datas"]["token"],
-                "refreshToken": r.json()["datas"]["refreshToken"]
+                "token": jsonresponse["datas"]["token"],
+                "refreshToken": jsonresponse["datas"]["refreshToken"]
             }
             self.session.cookies.set("token", "JWT%20" + self.user["token"])
             self.loggedin = True
-        elif r.json()["status"] == "error":
+
+        elif jsonresponse["status"] == "error":
             if self.verbose:
-                print("[!] Login error. (%s)" % r.json()["datas"])
+                print("[!] Login error. (%s)" % jsonresponse["datas"])
             self.loggedin = False
+
+        if jsonresponse["datas"] == "Example text about missing TOTP":
+            raise MissingTOTP("authentication error", jsonresponse["datas"])
+        if jsonresponse["datas"] == "Example text about failed login":
+            raise FailedLogin("authentication error", jsonresponse["datas"])
+        if jsonresponse["datas"] == "Example text about failed network connection":
+            raise FailedConnection("authentication error", jsonresponse["datas"])
+            
         return self.loggedin
 
     # Users ===========================================================================
@@ -92,11 +104,15 @@ class API(object):
             dict: A dictionary representing the user if the request is successful.
             None: If the user is not logged in or the request fails.
         """
+
         user = None
+
+        # Search for the user in the list of users
         for u in self.users_list():
             if u['_id'] == _id:
                 user = u
                 break
+
         if user is None:
             if self.verbose:
                 print("[!] API error. (Unknown user id %s)" % _id)

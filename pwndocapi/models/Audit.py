@@ -23,9 +23,19 @@ class Audit(object):
         self.__load()
 
     def delete(self):
+        """
+        Delete an audit.
+
+        This function sends a DELETE request to the /api/audits/%s endpoint to delete an audit.
+        """
         self.api.audits_delete(self._id)
 
     def add_finding(self, title, vulnType, category, description, observation, remediation, references, remediationComplexity, priority, poc, scope, cvssv3, customFields=[]):
+        """
+        Add a finding to an audit.
+
+        This function sends a POST request to the /api/audits/%s/findings endpoint to add a finding to an audit.
+        """
         scope = "<ul>" + "".join(["<li><p>%s</p></li>" % vt for vt in scope]) + "</ul>"
 
         self.api.audit_add_finding(
@@ -48,6 +58,11 @@ class Audit(object):
         )
 
     def delete_all_findings(self):
+        """
+        Delete all findings from an audit.
+
+        This function sends a DELETE request to the /api/audits/%s/findings endpoint to delete all findings from an audit.
+        """
         self.api.audit_delete_all_findings(self._id)
 
     ## Data =========================================================
@@ -55,41 +70,91 @@ class Audit(object):
     # Company ====
 
     def set_company(self):
+        """
+        Set the company for an audit.
+
+        This function sends a PUT request to the /api/audits/%s/company endpoint to set the company for an audit.
+        """
         pass
 
     def get_company(self):
+        """
+        Get the company for an audit.
+
+        This function sends a GET request to the /api/audits/%s/company endpoint to get the company for an audit.
+        """
         pass
 
     # Client ====
 
     def set_client(self):
+        """
+        Set the client for an audit.
+
+        This function sends a PUT request to the /api/audits/%s/client endpoint to set the client for an audit.
+        """
         pass
 
     def get_client(self):
+        """
+        Get the client for an audit.
+
+        This function sends a GET request to the /api/audits/%s/client endpoint to get the client for an audit.
+        """
         pass
 
     # Start date ====
 
     def set_start_date(self):
+        """
+        Set the start date for an audit.
+
+        This function sends a PUT request to the /api/audits/%s/startDate endpoint to set the start date for an audit.
+        """
         pass
 
     def get_start_date(self):
+        """
+        Get the start date for an audit.
+
+        This function sends a GET request to the /api/audits/%s/startDate endpoint to get the start date for an audit.
+        """
         pass
 
     # End date ====
 
     def set_end_date(self):
+        """
+        Set the end date for an audit.
+
+        This function sends a PUT request to the /api/audits/%s/endDate endpoint to set the end date for an audit.
+        """
         pass
 
     def get_end_date(self):
+        """
+        Get the end date for an audit.
+
+        This function sends a GET request to the /api/audits/%s/endDate endpoint to get the end date for an audit.
+        """
         pass
 
     # Reporting date ====
 
     def set_reporting_date(self):
+        """
+        Set the reporting date for an audit.
+
+        This function sends a PUT request to the /api/audits/%s/reportingDate endpoint to set the reporting date for an audit.
+        """
         pass
 
     def get_reporting_date(self):
+        """
+        Get the reporting date for an audit.
+
+        This function sends a GET request to the /api/audits/%s/reportingDate endpoint to get the reporting date for an audit.
+        """
         pass
 
     ##

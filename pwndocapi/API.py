@@ -308,6 +308,20 @@ class API(object):
             None: If the user is not logged in or the request fails.
         """
         return self.__api_get("/api/data/languages")
+    
+    def data_language_create(self, locale, language):
+        """
+        Create a new language.
+
+        This function sends a POST request to the "/api/data/languages" endpoint to create a new language entry,
+        specifying the desired locale code and language name.
+        The user must be authenticated to perform this action.
+
+        Returns:
+            dict: A dictionary with information about the created language if the request is successful.
+            None: If the request fails or the user is not logged in.
+        """
+        return self.__api_post("/api/data/languages", jsondata={"locale":locale,"language": language})
 
     def data_custom_fields(self):
         """
@@ -322,6 +336,32 @@ class API(object):
         """
         return self.__api_get("/api/data/custom-fields")
 
+    def data_custom_field_create(self, fieldType, label, display, displaySub, size, offset, required, description, text, options, position):
+        """
+        Create a new custom field.
+
+        This function sends a POST request to the "/api/data/custom-fields" endpoint to create a new custom field
+        with the specified parameters. It requires the user to be authenticated.
+
+        Returns:
+            dict: A dictionary with information about the created custom field if the request is successful.
+            None: If the request fails or the user is not logged in.
+        """
+        jsondata = {
+                    "fieldType": fieldType,
+                    "label": label,
+                    "display": display,
+                    "displaySub": displaySub,
+                    "size": size,
+                    "offset": offset,
+                    "required": required,
+                    "description": description,
+                    "text": text,
+                    "options": options,
+                    "position": position
+                }
+        return self.__api_post("/api/data/custom-fields", jsondata=jsondata)
+
     def data_audit_types(self):
         """
         Retrieve a list of audit types.
@@ -335,6 +375,19 @@ class API(object):
         """
         return self.__api_get("/api/data/audit-types")
 
+    def data_audit_type_create(self, name, templates,sections,hidden):
+        """
+        Create a new audit type.
+
+        This function sends a POST request to the "/api/data/audit-types" endpoint to create a new audit type
+        with the specified parameters. The user must be authenticated.
+
+        Returns:
+            dict: A dictionary containing details about the created audit type if the request is successful.
+            None: If the request fails or the user is not logged in.
+        """
+        return self.__api_post("/api/data/audit-types", jsondata={"name":name,"templates": templates,"sections":sections,"hidden": hidden})
+
     def data_sections(self):
         """
         Retrieve a list of sections.
@@ -347,6 +400,19 @@ class API(object):
             None: If the user is not logged in or the request fails.
         """
         return self.__api_get("/api/data/sections")
+    
+    def data_section_create(self, field, name, locale, text, icon):
+        """
+        Create a new section.
+
+        This function sends a POST request to the "/api/data/sections" endpoint to create a new section
+        with the specified parameters. The user must be authenticated.
+
+        Returns:
+            dict: A dictionary containing details about the created section if the request is successful.
+            None: If the request fails or the user is not logged in.
+        """
+        return self.__api_post("/api/data/sections", jsondata={"field":field,"name": name,"locale":locale,"text": text,"icon":icon})
 
     def data_vulnerability_categories(self):
         """
@@ -360,8 +426,47 @@ class API(object):
             None: If the user is not logged in or the request fails.
         """
         return self.__api_get("/api/data/vulnerability-categories")
+        
+    def data_vulnerability_category_create(self, name):
+        """
+        Create a new vulnerability category.
 
-    # Findings ==
+        This function sends a POST request to the "/api/data/vulnerability-categories" endpoint to create
+        a new vulnerability category with the specified name. The user must be authenticated.
+
+        Returns:
+            dict: A dictionary containing information about the created vulnerability category if the request is successful.
+            None: If the request fails or the user is not logged in.
+        """
+        return self.__api_post("/api/data/vulnerability-categories", jsondata={"name": name})
+    
+    def data_vulnerability_type(self):
+        """
+        Retrieve a list of vulnerability types.
+
+        This function sends a GET request to the "/api/data/vulnerability-types" endpoint to retrieve 
+        a list of available vulnerability types. The user must be authenticated to access this endpoint.
+
+        Returns:
+            list: A list of vulnerability types if the request is successful.
+            None: If the user is not logged in or if the request fails.
+        """
+        return self.__api_get("/api/data/vulnerability-types")
+
+    def data_vulnerability_type_create(self, name, locale):
+        """
+        Create a new vulnerability type.
+
+        This function sends a POST request to the "/api/data/vulnerability-types" endpoint to create
+        a new vulnerability type with the specified parameters. The user must be authenticated.
+
+        Returns:
+            dict: A dictionary containing details about the created vulnerability type if the request is successful.
+            None: If the request fails or the user is not logged in.
+        """
+        return self.__api_post("/api/data/vulnerability-types", jsondata={"name": name,"locale": locale})
+    
+    # Findings =================================================================
 
     def findings_get_by_id(self, _audit_id, _finding_id):
         """

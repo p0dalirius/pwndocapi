@@ -10,8 +10,8 @@ long_description = "A Python native library to automate reporting vulnerabilitie
 
 setuptools.setup(
     name="pwndocapi",
-    version="1.3.3",
-    description="",
+    version="1.3.4",
+    description="Python API client for PwnDoc",
     url="https://github.com/p0dalirius/pwndocapi",
     author="Podalirius",
     long_description=long_description,

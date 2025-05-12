@@ -293,7 +293,32 @@ class API(object):
         return self.__api_put("/api/audits/%s" % _audit_id, jsondata={
             "_id": _audit_id
         })
+    def audit_list_hosts(self, _audit_id):
+        """
+        Retrieve a list of hosts for an audit.
 
+        This function sends a GET request to the /api/audits/%s/network endpoint to retrieve a list of hosts for an audit.
+        It requires the user to be logged in to the API.
+
+        Returns:
+            list: A list of findings if the request is successful.
+            None: If the user is not logged in or the request fails.
+        """
+        return self.__api_get("/api/audits/%s/network" % _audit_id)
+
+    def audit_nmap_import(self, _audit_id, datas):
+        """
+        import an nmap report.
+
+        This function sends a PUT request to the /api/audits/%s/network endpoint to update an audit.
+        It requires the user to be logged in to the API.
+
+        Returns:
+            None: If the user is not logged in or the request fails.
+        """
+        #raise NotImplementedError("PUT /api/audits/%s/network not implemented yet for update")
+        return self.__api_put("/api/audits/%s/network" % _audit_id,datas)
+        
     # Data ============================================================================
 
     def data_languages(self):

@@ -599,6 +599,38 @@ class API(object):
                     "ext": template_file_extension,
                 }
         return self.__api_post("/api/templates", jsondata=jsondata)
+    
+    # Companies ===============================================================
+    def get_companies(self):
+        """
+        Retrieve the companies of the pwndoc instance
+
+        This function sends a GET request to the /api/companies endpoint to retrieve a list of companies.
+        It requires the user to be logged in to the API.
+
+        Returns:
+            list: List of companies
+            None: If the user is not logged in or the request fails.
+        """
+        return self.__api_get("/api/companies")
+    
+    def add_company(self, name_company, short_name_company="", logo=""):
+        """
+        Add the given company to the pwndoc instance
+
+        This function sends a POST request to the /api/companies endpoint to add a company.
+        It requires the user to be logged in to the API.
+
+        Returns:
+            dict: A dictionary representing the company if the request is successful.
+            None: If the user is not logged in or the request fails.
+        """
+        jsondata = {
+                    "name": name_company,
+                    "shortName": short_name_company,
+                    "logo": logo,
+                }
+        return self.__api_post("/api/companies", jsondata=jsondata)
 
     # Internal Methods =========================================================
 

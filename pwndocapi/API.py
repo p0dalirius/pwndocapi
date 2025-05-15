@@ -293,6 +293,41 @@ class API(object):
         return self.__api_put("/api/audits/%s" % _audit_id, jsondata={
             "_id": _audit_id
         })
+    
+    def audit_get_sections(self, _audit_id):
+        """
+        List custom sections of the given audit
+
+        This function sends a GET request to the /api/audits/%s/sections/ endpoint to 
+        list all the sections of the given audit.
+        It requires the user to be logged in to the API.
+
+        Returns:
+            None: If the user is not logged in or the request fails.
+        """
+        #raise NotImplementedError("GET /api/audits/%s/sections not implemented yet for update")
+        return self.__api_get("/api/audits/%s/sections" % _audit_id)
+    
+    def audit_update_custom_field(self, _audit_id, section_id, custom_fields):
+        """
+        Update custom fields from a section
+
+        This function sends a PUT request to the /api/audits/%s/sections/%s endpoint to update a custom field
+        It requires the user to be logged in to the API.
+
+        Returns:
+            dict: a list of custom_fields to be added inside 
+            None: If the user is not logged in or the request fails.
+        """
+        #raise NotImplementedError("PUT /api/audits/%s/sections/%s not implemented yet for update")
+        jsondata = {"customFields":custom_fields,
+                    "field":"test",
+                    "name":"test",
+                    "_id":section_id
+                }
+        return self.__api_put("/api/audits/%s/sections/%s" % (_audit_id,section_id), jsondata=jsondata)
+
+
     def audit_list_hosts(self, _audit_id):
         """
         Retrieve a list of hosts for an audit.
@@ -532,6 +567,38 @@ class API(object):
             None: If the user is not logged in or the request fails.
         """
         return self.__api_get("/api/vulnerabilities/%s" % lang)
+
+    # Templates ===============================================================
+    def get_templates(self):
+        """
+        Retrieve the Word templates uploaded to the pwndoc instance
+
+        This function sends a GET request to the /api/templates endpoint to retrieve a list of word templates.
+        It requires the user to be logged in to the API.
+
+        Returns:
+            list: List of templates
+            None: If the user is not logged in or the request fails.
+        """
+        return self.__api_get("/api/templates")
+    
+    def upload_template(self, template_name, template_content_base64, template_file_extension):
+        """
+        Upload the given Word templates in base64
+
+        This function sends a POST request to the /api/templates endpoint to upload word templates.
+        It requires the user to be logged in to the API.
+
+        Returns:
+            dict: A dictionary representing the finding if the request is successful.
+            None: If the user is not logged in or the request fails.
+        """
+        jsondata = {
+                    "name": template_name,
+                    "file": template_content_base64,
+                    "ext": template_file_extension,
+                }
+        return self.__api_post("/api/templates", jsondata=jsondata)
 
     # Internal Methods =========================================================
 

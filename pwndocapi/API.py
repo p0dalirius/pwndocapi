@@ -568,6 +568,19 @@ class API(object):
         """
         return self.__api_get("/api/vulnerabilities/%s" % lang)
 
+    def add_vulnerabilities(self, json_data_vulnerabilities):
+        """
+        Create new vulnerabilities inside the vulnerability database of pwndoc
+
+        This function sends a POST request to the "/api/vulnerabilities" endpoint to create
+        new vulnerabilities. The user must be authenticated.
+
+        Returns:
+            dict: A dictionary containing details about number of created vulnerabilities if the request is successful.
+            None: If the request fails or the user is not logged in.
+        """
+        return self.__api_post("/api/vulnerabilities", jsondata=json_data_vulnerabilities)
+
     # Templates ===============================================================
     def get_templates(self):
         """
